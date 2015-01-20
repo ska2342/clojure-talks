@@ -1,0 +1,24 @@
+* Instant Spaß With Instaparse
+
+  Talking about parser generators with Instaparse in Clojure
+
+* Abstract
+
+Instaparse is a Clojure library for generating parsers from a
+context-free grammar. It implements a GLL parser, takes grammars in
+ABNF or EBNF and can create grammars at runtime. Without an additional
+compile step and due to the flexible input format and some useful
+additions, Instaparse is particularly pleasant to use. This talk
+introduces Instaparse with simple examples, continues with real-world
+examples and finally explores the dynamic nature of Instaparse. 
+
+* Events
+
+  - [[http://www.sourcetalk.de/2014/][SourceTalk 2014]]
+  - [[http://www.clojured.de/][:clojureD 2015]]
+
+* Links
+
+  - [[http://clojure.org/][Clojure]]
+  - [[https://github.com/Engelberg/instaparse][Instparse]]
+
