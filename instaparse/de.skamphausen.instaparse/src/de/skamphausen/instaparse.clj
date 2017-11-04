@@ -4,6 +4,11 @@
             [clojure.xml            :as xml]))
 
 
+;;; This talk
+;; Online
+;; https://github.com/ska2342/clojure-talks
+;; https://www.heise.de/developer/artikel/Parser-aus-kontextfreien-Grammatiken-erzeugen-mit-Instaparse-2444019.html
+
 ;;; Parsing
 
 ;;; The Canonical Resources
@@ -27,21 +32,22 @@
 
 ;;; Well Known Implementations
 ;; Yacc, ANTLR, Bison, uvm
-
+;; Paired with lexers like lex, flex
 
 ;;; GLL Parsing (Generalized LL)
+;; By Elizabeth Scott and Adrian Johnstone
 ;; Instaparse
 ;; http://dotat.at/tmp/gll.pdf
 ;; http://www.codecommit.com/blog/scala/unveiling-the-mysteries-of-gll-part-1
 ;; http://www.codecommit.com/blog/scala/unveiling-the-mysteries-of-gll-part-2
-
+;; At least n^2
 
 
 ;;; let's focus on actually using Instaparse
 
 
 
-;;; 2014
+;;; 2017
 ;; Given the widespread usage of JSON, XML and CSV it is not so easy
 ;; to find relevant plain text formats today.  Do not try to use
 ;; Instaparse for formats for which specialized libraries exist.
@@ -134,7 +140,7 @@
 ;; http://www.robots.ox.ac.uk/~spline/cddb-howto.txt
 ;; Note the | to indicate alternatives
 ;; + is one or more
-;; There is a difference regarding greedyness for 
+;; There is a difference regarding greediness for
 ;; - instaparse grammar
 ;; - and regexps.
 ;; Test by transposing + and ' in name
@@ -204,7 +210,6 @@
 ;; Uses the parser saved earlier
 ;; Transformation step is last: takes parsing result and
 ;;   transformation map for each NT.
-
 (comment
   (i/transform cddb-transform-map
                (cddb-parser cddb-example))
@@ -218,8 +223,6 @@
 
 ;;; PGN Chess
 ;; http://www.thechessdrum.net/PGN_Reference.txt
-
-
 
 ;;; Example data
 (def magnus-carlsen-pgn 
@@ -372,7 +375,7 @@ Unknown   = <'*'>
 (def grammar-log-def
   "<fmt>       = <'LogFormat '> quote declaration quote
    <quote>     = <'\"'>
-   <declaration> = (char+ | fmtstr)+
+   <declaration> = (char | fmtstr)+
    char        = #'[\\w ]+'
    <fmtstr>    = datetime | ip
    ip          = <'%a'>
@@ -385,7 +388,7 @@ Unknown   = <'*'>
   (parse-format-def apache-log-def))
 ;; Our plan is to translate this into a grammar which can parse a
 ;; line of log output.  Just like combined above but programmatically
-;; at runtime,
+;; at runtime.
 ;; So, we need to create the grammar for the line and add all required
 ;; NT.
 
